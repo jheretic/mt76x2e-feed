@@ -1,0 +1,13 @@
+diff --git a/mt76x2e/src/os/linux/rt_profile.c b/mt76x2e/src/os/linux/rt_profile.c
+index 3b5842f..3bf6335 100644
+--- a/src/os/linux/rt_profile.c
++++ b/src/os/linux/rt_profile.c
+@@ -250,7 +250,7 @@ NDIS_STATUS	RTMPReadParametersHook(RTMP_ADAPTER *pAd)
+ 		{
+ #ifndef OS_ABL_SUPPORT
+ 			// TODO: need to roll back when convert into OSABL code
+-				 fsize = (ULONG)srcf->f_dentry->d_inode->i_size;
++				 fsize = (ULONG)file_inode(srcf)->i_size;
+ 				if (buf_size < (fsize + 1))
+ 					buf_size = fsize + 1;
+ #endif /* OS_ABL_SUPPORT */

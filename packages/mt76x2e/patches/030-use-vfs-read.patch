@@ -1,0 +1,14 @@
+diff --git a/mt76x2e/src/os/linux/rt_linux.c b/mt76x2e/src/os/linux/rt_linux.c
+index 4a47502..b843c3c 100644
+--- a/src/os/linux/rt_linux.c
++++ b/src/os/linux/rt_linux.c
+@@ -896,8 +896,8 @@ int RtmpOSFileRead(RTMP_OS_FD osfd, char *pDataPtr, int readLen)
+ 	if (osfd->f_op && osfd->f_op->read) {
+ 		return osfd->f_op->read(osfd, pDataPtr, readLen, &osfd->f_pos);
+ 	} else {
+-		DBGPRINT(RT_DEBUG_ERROR, ("no file read method\n"));
+-		return -1;
++		DBGPRINT(RT_DEBUG_ERROR, ("no file read method, using vfs_read\n"));
++		return vfs_read(osfd, pDataPtr, readLen, &osfd->f_pos);
+ 	}
+ }
